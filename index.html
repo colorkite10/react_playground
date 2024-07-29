@@ -14,16 +14,38 @@
   <script type="text/babel">
     const root = document.getElementById("root");
     const App = () => {
-      const [counter, setCounter] = React.useState(0);
+      const [minutes, setMinutes] = React.useState(0);
 
-      const onClick = () => {
-        setCounter(counter + 1);
+      const onChange = (event) => {
+        setMinutes(event.target.value);
       };
+
+      const reset = () => setMinutes(0);
 
       return (
         <div>
-          <h3>Total clicks: {counter}</h3>
-          <button onClick={onClick}>Click me</button>
+          <h1>super converter</h1>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={minutes}
+              id="minutes"
+              onChange={onChange}
+              placeholder="minutes"
+              type="number"
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={minutes / 60}
+              id="hours"
+              placeholder="hours"
+              type="number"
+              disabled
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
         </div>
       );
     };
