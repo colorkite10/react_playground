@@ -13,16 +13,16 @@
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    const Button = ({ text, isBig }) => {
+    const Button = ({ text, onClick }) => {
       return (
         <button
+          onClick={onClick}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            fontSize: isBig ? 18 : 16,
           }}
         >
           {text}
@@ -30,11 +30,16 @@
       );
     };
 
+    const MemorizedButton = React.memo(Button);
+
     const App = () => {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
+
       return (
         <div>
-          <Button text="Save Changes" isBig={true} />
-          <Button text="Continue" />
+          <MemorizedButton text={value} onClick={changeValue} />
+          <MemorizedButton text="Continue" />
         </div>
       );
     };
